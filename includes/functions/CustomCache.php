@@ -34,8 +34,12 @@ class CustomCache {
             $hash_url = md5($url);
             $content = file_get_contents($url);
             $file = $_SERVER['DOCUMENT_ROOT'] . '/pokeapi/cache/' . $hash_url . '.cache';
-            file_put_contents($file, json_encode(($content)));
-            return true;
+            if ($content) {
+                file_put_contents($file, json_encode(($content)));
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

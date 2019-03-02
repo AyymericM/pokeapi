@@ -22,7 +22,16 @@ function request(String $url = null)
             if ($res) {
                 return $res;
             } else {
-                return file_get_contents($url);
+                try {
+                    $fallback = file_get_contents($url);
+                    if ($fallback) {
+                        return $fallback;
+                    } else {
+                        return false;
+                    }
+                } catch (\Throwable $th) {
+                    return false;
+                }
             }
         }
     }
