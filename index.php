@@ -3,7 +3,7 @@
 include 'includes/views/head.php';
 include 'includes/functions/Request.php';
 
-$pokemons = request('/pokemons');
+$pokemons = json_decode(request('/pokemon'));
 
 ?>
 <body>
@@ -14,11 +14,11 @@ $pokemons = request('/pokemons');
         <div class="container">
             <?php
                 if ($pokemons) {
-                    foreach ($pokemons as $pokemon):
+                    foreach ($pokemons->results as $pokemon):
             ?>
                 <div class="item">
                     <img class="thumb"/>
-                    <div class="name">Hello world</div>
+                    <div class="name"><?= $pokemon->name ?></div>
                     <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam aut odit maxime necessitatibus asperiores qui, nesciunt animi</div>
                 </div>
             <?php  

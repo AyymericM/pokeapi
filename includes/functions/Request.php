@@ -20,10 +20,10 @@ function request(String $url = null)
 
             // cache fallback
             if ($res) {
-                return $res;
+                return json_decode($res);
             } else {
                 try {
-                    $fallback = file_get_contents($url);
+                    $fallback = json_decode(file_get_contents($url));
                     if ($fallback) {
                         return $fallback;
                     } else {
