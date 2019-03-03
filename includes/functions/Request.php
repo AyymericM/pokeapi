@@ -2,13 +2,15 @@
 define('API_URL', 'https://pokeapi.co/api/v2');
 include 'CustomCache.php';
 
-function request(String $url = null)
+function request(String $url = null, Bool $fullURL = false)
 {
     if ($url == null) {
         return false;
     } else {
         $cache = new CustomCache;
-        $url = API_URL . $url;
+        if (!$fullURL) {
+            $url = API_URL . $url;
+        }
         $isCached = $cache->checkCache($url);
 
         if ($isCached == true) {

@@ -6,20 +6,18 @@ include 'includes/functions/Request.php';
 $pokemons = json_decode(request('/pokemon'));
 
 ?>
-<body>
-    <div class="navbar">
-        <a href="/" class="navbar-content">Pokemon List</a>
-    </div>
     <div class="wrapper">
-        <div class="container">
+        <div class="container homelist">
             <?php
                 if ($pokemons) {
                     foreach ($pokemons->results as $pokemon):
             ?>
                 <div class="item">
-                    <img class="thumb"/>
-                    <div class="name"><?= $pokemon->name ?></div>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam aut odit maxime necessitatibus asperiores qui, nesciunt animi</div>
+                    <div class="content">
+                        <img src="<?= json_decode(request($pokemon->url, true))->sprites->front_default ?>" class="thumb"/>
+                        <div class="name"><?= $pokemon->name ?></div>
+                    </div>
+                    <a href="pokemon.php/?id=<?= json_decode(request($pokemon->url, true))->id ?>" class="btnmore">En savoir plus</a>
                 </div>
             <?php  
                     endforeach;
