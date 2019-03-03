@@ -22,10 +22,10 @@ function request(String $url = null, Bool $fullURL = false)
 
             // cache fallback
             if ($res) {
-                return json_decode($res);
+                return $res;
             } else {
                 try {
-                    $fallback = json_decode(file_get_contents($url));
+                    $fallback = file_get_contents($url);
                     if ($fallback) {
                         return $fallback;
                     } else {
